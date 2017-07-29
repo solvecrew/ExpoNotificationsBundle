@@ -20,13 +20,12 @@
         "eightpoints/guzzle-bundle": "^5.3"
     },
     "require-dev": {
+        "php": ">=5.3",
+        "eightpoints/guzzle-bundle": "^5.3"
     },
     "autoload": {
         "psr-4": {
             "Solvecrew\\ExpoNotificationsBundle\\": ""
-        },
-        "exclude-from-classmap": [
-            "/Tests/"
-        ]
+        }
     }
 }
