@@ -1,0 +1,4 @@
+services:
+   sc_expo_notifications.notification_manager:
+       class: Solvecrew\ExpoNotificationsBundle\Manager\NotificationManager
+       arguments: ['@doctrine.orm.entity_manager', '@guzzle.client.expo', '%expo_notification_url%']
