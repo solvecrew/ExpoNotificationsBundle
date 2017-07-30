@@ -1,0 +1,3 @@
+sc_expo_notifications_homepage:
+    path:     /_api/notification
+    defaults: { _controller: SCExpoNotificationsBundle:Notification:index }
