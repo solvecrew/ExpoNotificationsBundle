@@ -39,6 +39,7 @@ class NotificationManager
      *
      * @param string $message
      * @param string $token
+     * @param string $title
      *
      * @return array
      */
@@ -263,7 +264,6 @@ class NotificationManager
 
     /**
      * Creates an array of requestData arrays from given NotificationContentModels.
-     * Returns JSON if wanted.
      *
      * @param array $notificationContentModels
      *
