@@ -29,8 +29,6 @@ class NotificationContentModel
     private $body;
 
     /**
-     * sound?: 'default' | null,
-     *
      * @var string
      */
     private $sound = 'default';
@@ -46,7 +44,6 @@ class NotificationContentModel
     private $expiration;
 
     /**
-     * priority?: 'default' | 'normal' | 'high',
      * @var string
      */
     private $priority = 'high';
@@ -56,97 +53,315 @@ class NotificationContentModel
      */
     private $badge;
 
-    public function setTo($to)
+    /**
+     * @var bool
+     */
+    private $wasSuccessful;
+
+    /**
+     * @var string
+     */
+    private $responseMessage;
+
+    /**
+     * @var array
+     */
+    private $responseDetails;
+
+    /**
+     * Set to
+     *
+     * @param string $token
+     *
+     * @return NotificationContentModel
+     */
+    public function setTo(string $token)
     {
-        $this->to = self::EXPO_TOKEN_PREFIX . $to . self::EXPO_TOKEN_SUFFIX;
+        $this->to = self::EXPO_TOKEN_PREFIX . $token . self::EXPO_TOKEN_SUFFIX;
+
+        return $this;
     }
 
+    /**
+     * Get to
+     *
+     * @return string
+     */
     public function getTo()
     {
         return $this->to;
     }
 
-    public function setData($data)
+    /**
+     * Set data
+     *
+     * @param array $data
+     *
+     * @return NotificationContentModel
+     */
+    public function setData(array $data)
     {
         $this->data = $data;
+
+        return $this;
     }
 
+    /**
+     * Get data
+     *
+     * @return array
+     */
     public function getData()
     {
         return $this->data;
     }
 
-    public function setTitle($title)
+    /**
+     * Set title
+     *
+     * @param string $title
+     *
+     * @return NotificationContentModel
+     */
+    public function setTitle(string $title)
     {
         $this->title = $title;
+
+        return $this;
     }
 
+    /**
+     * Get title
+     *
+     * @return string
+     */
     public function getTitle()
     {
         return $this->title;
     }
 
-    public function setBody($body)
+    /**
+     * Set body
+     *
+     * @param string $body
+     *
+     * @return NotificationContentModel
+     */
+    public function setBody(string $body)
     {
         $this->body = $body;
+
+        return $this;
     }
 
+    /**
+     * Get body
+     *
+     * @return string
+     */
     public function getBody()
     {
         return $this->body;
     }
 
-    public function setSound($sound)
+    /**
+     * Set sound
+     *
+     * @param string $sound
+     *
+     * @return NotificationContentModel
+     */
+    public function setSound(string $sound)
     {
         $this->sound = $sound;
+
+        return $this;
     }
 
+    /**
+     * Get sound
+     *
+     * @return string
+     */
     public function getSound()
     {
         return $this->sound;
     }
 
-    public function setTtl($ttl)
+    /**
+     * Set ttl
+     *
+     * @param int $ttl
+     *
+     * @return NotificationContentModel
+     */
+    public function setTtl(int $ttl)
     {
         $this->ttl = $ttl;
+
+        return $this;
     }
 
+    /**
+     * Get ttl
+     *
+     * @return int
+     */
     public function getTtl()
     {
         return $this->ttl;
     }
 
-    public function setExpiration($expiration)
+    /**
+     * Set expiration
+     *
+     * @param int $expiration
+     *
+     * @return NotificationContentModel
+     */
+    public function setExpiration(int $expiration)
     {
         $this->expiration = $expiration;
+
+        return $this;
     }
 
+    /**
+     * Get expiration
+     *
+     * @return int
+     */
     public function getExpiration()
     {
         return $this->expiration;
     }
 
-    public function setPriority($priority)
+    /**
+     * Set priority
+     *
+     * @param string $priority
+     *
+     * @return NotificationContentModel
+     */
+    public function setPriority(string $priority)
     {
         $this->priority = $priority;
+
+        return $this;
     }
 
+    /**
+     * Get priority
+     *
+     * @return string
+     */
     public function getPriority()
     {
         return $this->priority;
     }
 
-    public function setBadge($badge)
+    /**
+     * Set badge
+     *
+     * @param int $badge
+     *
+     * @return NotificationContentModel
+     */
+    public function setBadge(int $badge)
     {
         $this->badge = $badge;
+
+        return $this;
     }
 
+    /**
+     * Get badge
+     *
+     * @return int
+     */
     public function getBadge()
     {
         return $this->badge;
     }
 
-    public function getJson()
+    /**
+     * Set wasSuccessful
+     *
+     * @param bool $wasSuccessful
+     *
+     * @return NotificationContentModel
+     */
+    public function setWasSuccessful(bool $wasSuccessful)
+    {
+        $this->wasSuccessful = $wasSuccessful;
+
+        return $this;
+    }
+
+    /**
+     * Get wasSuccessful
+     *
+     * @return bool
+     */
+    public function getWasSuccessful()
+    {
+        return $this->wasSuccessful;
+    }
+
+    /**
+     * Set responseMessage
+     *
+     * @param string $responseMessage
+     *
+     * @return NotificationContentModel
+     */
+    public function setResponseMessage(string $responseMessage)
+    {
+        $this->responseMessage = $responseMessage;
+
+        return $this;
+    }
+
+    /**
+     * Get responseMessage
+     *
+     * @return string
+     */
+    public function getResponseMessage()
+    {
+        return $this->responseMessage;
+    }
+
+    /**
+     * Set responseDetails
+     *
+     * @param array $responseDetails
+     *
+     * @return NotificationContentModel
+     */
+    public function setResponseDetails(array $responseDetails)
+    {
+        $this->responseDetails = $responseDetails;
+
+        return $this;
+    }
+
+    /**
+     * Get responseDetails
+     *
+     * @return array
+     */
+    public function getResponseDetails()
+    {
+        return $this->responseDetails;
+    }
+
+    /**
+     * Get requestData
+     *
+     * @return array
+     */
+    public function getRequestData()
     {
         $result = [];
 
@@ -186,6 +401,6 @@ class NotificationContentModel
             $result['badge'] = $this->badge;
         }
 
-        return json_encode([$result]);
+        return $result;
     }
 }

@@ -1,5 +1,10 @@
 Changelog
 =========
 
-### 1.0.0
-* Initial release.
+### Pre-Release
+
+* Basic functionality improved. Eased the usage overall.
+
+* Composer setup to make bundle reusable.
+
+* Basic project setup.
