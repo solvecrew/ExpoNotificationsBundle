@@ -127,6 +127,48 @@ For example:
 ```
 As you can see, this one is really straight forward. It returns a single NotificationContentModel as descibed above.
 
+## Full Example
+
+To even ease the integration process further, see the following example.
+
+```
+// Get an instance of the NotificationManager provided by this bundle.
+// Using the service, that is available since the bundle installation.
+// Better would be to inject the service as a dependency in your service configuration.
+$notificationManager = $this->get('sc_expo_notifications.notification_manager');
+
+// Prepare the messages that shall be sent. This will be more sophisticated under realistic circumstances...
+$messages = [
+    'Hello there!',
+    'What's up?!',
+];
+
+// Prepare the ExpoPushTokens of the recipients.
+$tokens = [
+    'H-Dsb2ATt2FHoD_5rVG5rh',
+    'S_Fs-1ATt4AHDD_5rXcYr4',
+];
+
+// Send the notifications using the messages and the tokens that will receive them.
+$notificationContentModels = $notificationManager->sendNotifications(
+    $notificationMessages,
+    $notificationTokens
+);
+
+// Handle the response here. Each NotificationContentModel in the $notificationContentModels array holds the information about its success/error and more detailed information.
+```
+
+If the service `sc_expo_notifications.notification_manager` is not available for some reason, debug your container with
+`bin/console debug:container | grep notification`.
+You should see:
+```
+sc_expo_notifications.guzzle_client                GuzzleHttp\Client
+sc_expo_notifications.notification_manager         Solvecrew\ExpoNotificationsBundle\Manager\NotificationManager
+```
+
+The first service is the guzzle client which is the dependency of our bundle.
+The second service is the notificationManager the bundle provides to handle all notification related tasks.
+
 
 # Based on the Expo push notifications API
 
