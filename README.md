@@ -10,15 +10,15 @@ Install the bundle using composer (Working after official release):
 
 Enable the Bundle in the app/AppKernel.php file:
 ```
-	$bundles = [
-		...
-		new Solvecrew\ExpoNotificationsBundle\SCExpoNotificationsBundle(),
-		...
-	];
+$bundles = [
+    ...
+    new Solvecrew\ExpoNotificationsBundle\SCExpoNotificationsBundle(),
+    ...
+];
 ```
 Add the following parameter in your app/config/parameters.yml file:
 ```
-    expo_notification_url: https://exp.host/--/api/v2/push/send
+expo_notification_url: https://exp.host/--/api/v2/push/send
 ```
 NOTE: `https://exp.host/--/api/v2/push/send` is the default url. If you want to use another endpoint, change it as you
 like.
@@ -35,7 +35,7 @@ sc_expo_notifications:
 
 And then add the `expo_api_endpoint` parameter in your `app/config/parameters.yml` file:
 ```
-    expo_api_endpoint: https://exp.host/--/api/v2/push/send
+expo_api_endpoint: https://exp.host/--/api/v2/push/send
 ```
 
 If you prefer to not add it as a parameter in your `parameters.yml` file you can add the URI in your config.yml file directly:
@@ -58,9 +58,9 @@ The service of the NotificationManager is `sc_expo_notifications.notification_ma
 - Use it in a controller with `$this->container->get('sc_expo_notifications.notification_manager')`.
 - Inject it as a dependency like:
 ```
-    app.example_manager:
-      class: AcmeBundle\Manager\ExampleManager
-      arguments: ['@sc_expo_notifications.notification_manager']
+app.example_manager:
+    class: AcmeBundle\Manager\ExampleManager
+    arguments: ['@sc_expo_notifications.notification_manager']
 ```
 NOTE that the important part here is the `arguments: ['@sc_expo_notifications.notification_manager']` of course.
 
@@ -86,7 +86,7 @@ Popular functions are:
     ): array
     {
 		...
-	}
+    }
 ```
 
 Therefore you need to provide an array of `messages` as strings and an array of `tokens` as strings (to be more
@@ -123,7 +123,7 @@ For example:
     ): NotificationContentModel
     {
 		...
-	}
+    }
 ```
 As you can see, this one is really straight forward. It returns a single NotificationContentModel as descibed above.
 
@@ -155,7 +155,8 @@ $notificationContentModels = $notificationManager->sendNotifications(
     $notificationTokens
 );
 
-// Handle the response here. Each NotificationContentModel in the $notificationContentModels array holds the information about its success/error and more detailed information.
+// Handle the response here. Each NotificationContentModel in the $notificationContentModels array
+// holds the information about its success/error and more detailed information.
 ```
 
 If the service `sc_expo_notifications.notification_manager` is not available for some reason, debug your container with
