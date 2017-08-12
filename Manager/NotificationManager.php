@@ -2,12 +2,19 @@
 
 namespace Solvecrew\ExpoNotificationsBundle\Manager;
 
+use GuzzleHttp\Exception\ClientException;
 use Solvecrew\ExpoNotificationsBundle\Model\NotificationContentModel;
 
 class NotificationManager
 {
     // The info to hint invalid notification messages.
     const INVALID_MESSAGE_INFO = 'Invalid message provided.';
+    // The info to hint invalid expo notifications API endpoint loaded using the configuration.
+    const INVALID_EXPO_ENDPOINT_MESSAGE = 'Invalid Expo API endpoint configured.';
+    // The info to hint a connection exception.
+    const CONNECT_EXCEPTION_MESSAGE = 'Connection could not be established.';
+    // The infor that indicates that an unknown exception was thrown.
+    const UNKNOWN_EXCEPTION_MESSAGE = 'A Exception was thrown. Neither a ConnectionException nor a ClientException.';
 
     /**
      * @var EntityManager
@@ -148,6 +155,7 @@ class NotificationManager
         // TODO Handle Response here.
 
         $responseData = json_decode($response->getBody()->read(1024), true);
+
         return $responseData['data'][0];
     }
 
@@ -173,11 +181,54 @@ class NotificationManager
             ),
         ];
 
-        $response = $this->httpClient->request(
-            'POST',
-            $this->expoApiUrl,
-            $requestData
-        );
+        try {
+            $response = $this->httpClient->request(
+                'POST',
+                $this->expoApiUrl,
+                $requestData
+            );
+        } catch (ClientException $e) {
+            // Creating a Message from the status code and the reasonPhrase. E.g. '404: Not Found'.
+            $exceptionMessage = $e->getResponse()->getStatusCode() . ': ' . $e->getResponse()->getReasonPhrase();
+
+            // Returning an array in the style of the guzzle reponse, so it can be handled by the standard function.
+            $exceptionResponse = [
+                'status' => 'error',
+                'message' => $exceptionMessage,
+                'details' => [self::INVALID_EXPO_ENDPOINT_MESSAGE],
+            ];
+        } catch (ConnectException $e) {
+            // Creating a Message from the status code and the reasonPhrase. E.g. '404: Not Found'.
+            $exceptionMessage = 'No Response.';
+
+            // Returning an array in the style of the guzzle reponse, so it can be handled by the standard function.
+            $exceptionResponse = [
+                'status' => 'error',
+                'message' => $exceptionMessage,
+                'details' => [self::CONNECT_EXCEPTION_MESSAGE],
+            ];
+        } catch (Exception $e) {
+            // Creating a Message from the status code and the reasonPhrase. E.g. '404: Not Found'.
+            $exceptionMessage = 'An unknown Exception occured.';
+
+            // Returning an array in the style of the guzzle reponse, so it can be handled by the standard function.
+            $exceptionResponse = [
+                'status' => 'error',
+                'message' => $exceptionMessage,
+                'details' => [self::UNKNOWN_EXCEPTION_MESSAGE],
+            ];
+        }
+
+        if(!$response) {
+            $exceptionResponseArray = [];
+            $i = 0;
+            while ($i < count($notificationContentModels)) {
+                $exceptionResponseArray[] = $exceptionResponse;
+                $i++;
+            }
+
+            return $exceptionResponseArray;
+        }
 
         $responseData = json_decode($response->getBody()->read(1024), true);
 

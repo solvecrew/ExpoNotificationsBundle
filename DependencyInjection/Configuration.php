@@ -12,6 +12,9 @@ use Symfony\Component\Config\Definition\ConfigurationInterface;
  */
 class Configuration implements ConfigurationInterface
 {
+    // Defaults:
+    const EXPO_API_ENDPOINT = 'https://exp.host/--/api/v2/push/send';
+
     /**
      * {@inheritdoc}
      */
@@ -20,9 +23,11 @@ class Configuration implements ConfigurationInterface
         $treeBuilder = new TreeBuilder();
         $rootNode = $treeBuilder->root('sc_expo_notifications');
 
-        // Here you should define the parameters that are allowed to
-        // configure your bundle. See the documentation linked above for
-        // more information on that topic.
+        $rootNode
+            ->children()
+                ->scalarNode('expo_api_endpoint')->defaultValue(self::EXPO_API_ENDPOINT)->end()
+            ->end()
+        ;
 
         return $treeBuilder;
     }

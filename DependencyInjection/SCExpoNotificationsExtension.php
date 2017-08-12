@@ -24,5 +24,9 @@ class SCExpoNotificationsExtension extends Extension
 
         $loader = new Loader\YamlFileLoader($container, new FileLocator(__DIR__.'/../Resources/config'));
         $loader->load('services.yml');
+
+        $def = $container->getDefinition('sc_expo_notifications.notification_manager');
+        // Inject the configured API endpoint string as the third argument.
+        $def->replaceArgument(2, $config['expo_api_endpoint']);
     }
 }
