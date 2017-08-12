@@ -6,7 +6,9 @@ This Bundles purpose is to handle the BE tasks of the push notifications service
 # Installation
 
 Install the bundle using composer (Working after official release):
-```composer require solvecrew/ExpoNotificationsBundle```
+```
+composer require solvecrew/ExpoNotificationsBundle
+```
 
 Enable the Bundle in the app/AppKernel.php file:
 ```
