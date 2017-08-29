@@ -177,6 +177,77 @@ $notificationContentModels = $notificationManager->sendNotifications(
 // holds the information about its success/error and more detailed information.
 ```
 
+If your use case is more complex or you just want to leverage more of the notification funtions you can use the
+`sendNotificationHttp` function of the NotificationManager. For that you need to create the NotificationContentModel
+yourself.
+```
+// Use statement for the NotificationContentModel.
+use Solvecrew\ExpoNotificationsBundle\Model\NotificationContentModel;
+
+// Get an instance of the NotificationManager provided by this bundle.
+// Using the service, that is available since the bundle installation.
+// Better would be to inject the service as a dependency in your service configuration.
+$notificationManager = $this->get('sc_expo_notifications.notification_manager');
+
+$token = 'H-Dsb2ATt2FHoD_5rVG5rh';
+$message = 'The message of the notification.';
+$data = ['foo' => 'bar'];
+
+$notificationContentModel = new NotificationContentModel();
+$notificationContentModel
+    ->setTo($token)
+    ->setBody($message)
+    ->setData($data);
+
+// Send the notification.
+$httpResponse = $notificationManager->sendNotificationHttp($notificationContentModel);
+
+// Handle the response using the notificationManager. Enriches the NotifcationContentModel with the http response data.
+$notificationContentModel = $notificationManager->handleHttpResponse($httpResponse, [$notificationContentModel]);
+
+```
+
+If you want to send multiple notifications this way, use `sendNotificationsHttp` (plural).
+```
+// Use statement for the NotificationContentModel.
+use Solvecrew\ExpoNotificationsBundle\Model\NotificationContentModel;
+
+// Get an instance of the NotificationManager provided by this bundle.
+// Using the service, that is available since the bundle installation.
+// Better would be to inject the service as a dependency in your service configuration.
+$notificationManager = $this->get('sc_expo_notifications.notification_manager');
+
+$data = ['foo' => 'bar'];
+
+// Create a NotificationContentModel
+$notificationContentModel = new NotificationContentModel();
+$notificationContentModel
+    ->setTo('H-Dsb2ATt2FHoD_5rVG5rh')
+    ->setBody('test message')
+    ->setData($data);
+
+// Create a second NotificationContentModel
+$anotherNotificationContentModel = new NotificationContentModel();
+$anotherNotificationContentModel
+    ->setTo('Z-5sb2AFt2FHoD_5rVG5rh')
+    ->setBody('Your message here')
+    ->setData($data);
+
+$notificationContentModels = [
+    $notificationContentModel,
+    $anotherNotificationContentModel,
+];
+
+// Send the notifications.
+$httpResponse = $notificationManager->sendNotificationsHttp($notificationContentModels);
+
+// Handle the response using the notificationManager. Enriches the NotifcationContentModel with the http response data.
+$notificationContentModels = $notificationManager->handleHttpResponse($httpResponse, $notificationContentModels);
+
+// The notificationContentModels have now been updated. The info for each notification is now stored in each model.
+```
+# Troubleshooting
+
 If the service `sc_expo_notifications.notification_manager` is not available for some reason, debug your container with
 `bin/console debug:container | grep notification`.
 You should see:
