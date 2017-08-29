@@ -52,7 +52,8 @@ class NotificationManager
     public function sendNotification(
         string $message,
         string $token,
-        string $title = ''
+        string $title = '',
+        string $data = null
     ): NotificationContentModel
     {
         $notificationContentModel = new NotificationContentModel();
@@ -62,6 +63,10 @@ class NotificationManager
 
         if (strlen($title) > 0) {
             $notificationContentModel->setTitle($title);
+        }
+
+        if (is_array($data)) {
+            $notificationContentModel->setData($data);
         }
 
         // Validate the given message.
@@ -88,20 +93,22 @@ class NotificationManager
      * @param array $messages
      * @param array $tokens
      * @param array $titles
+     * @param array $data
      *
      * @return array
      */
     public function sendNotifications(
         array $messages,
         array $tokens,
-        array $titles = []
+        array $titles = [],
+        array $data = []
     ): array
     {
         if (count($messages) !== count($tokens)) {
             return [];
         }
 
-        $notificationContentModels = $this->createNotificationContentModels($tokens, $messages, $titles);
+        $notificationContentModels = $this->createNotificationContentModels($tokens, $messages, $titles, $data);
 
         $httpResponse = $this->sendNotificationsHttp($notificationContentModels);
 
@@ -129,7 +136,7 @@ class NotificationManager
     /**
      * Sends an HTTP request to the expo API to issue a push notification.
      *
-     * @param array $notifications
+     * @param NotificationContentModel $notificationContentModel
      *
      * @return array
      */
@@ -241,13 +248,15 @@ class NotificationManager
      * @param array $tokens
      * @param array $messages
      * @param array $titles
+     * @param array $data
      *
      * @return array
      */
     private function createNotificationContentModels(
         array $tokens,
         array $messages,
-        array $titles = []
+        array $titles = [],
+        array $data = []
     ): array
     {
         $notificationContentModels = [];
@@ -257,14 +266,25 @@ class NotificationManager
             $hasTitle = true;
         }
 
+        $hasData = false;
+        if (count($data) > 0) {
+            $hasData = true;
+        }
+
         foreach ($tokens as $key => $token) {
             $model = new NotificationContentModel();
             $model
                 ->setTo($token)
                 ->setBody($messages[$key]);
+
             if ($hasTitle && strlen($titles[$key]) > 0) {
                 $model->setTitle($titles[$key]);
             }
+
+            if ($hasData && is_array($data[$key]) > 0) {
+                $model->setData($data[$key]);
+            }
+
             $notificationContentModels[] = $model;
         }
 
