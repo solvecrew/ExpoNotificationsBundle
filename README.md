@@ -91,7 +91,8 @@ specific: The recipients ExponentPushToken. Like `sITGtlHf1-mSgUyQIVbVMJ`, witho
 sourrounding.). The first message in the messages array will be delivered to the first token (recipient) in the tokens
 array. And so on. Optionally you can provide a `titles` array which holds titles for the notifications. Last, you can
 provide an array of data arrays that will be added to the notification as a JSON object for further handling in the
-front-end. It is important to know, that each notification needs an array as data!
+front-end. It is important to know, that each notification needs an array as data! See the Full Example below for more
+information.
 
 The function returns you an array of NotificationContentModel. One for each notification that was tried to send.
 Those NotificationContentModels hold all the information about the notification.
@@ -121,7 +122,7 @@ For example:
         string $message,
         string $token,
         string $title = '',
-		array $data = null
+        array $data = null
     ): NotificationContentModel
     {
 		...
@@ -168,8 +169,8 @@ $data = [
 $notificationContentModels = $notificationManager->sendNotifications(
     $messages,
     $tokens,
-	$titles,
-	$data
+    $titles,
+    $data
 );
 
 // Handle the response here. Each NotificationContentModel in the $notificationContentModels array
