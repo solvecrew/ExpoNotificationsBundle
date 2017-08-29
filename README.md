@@ -198,7 +198,7 @@ $notificationContentModel
     ->setTo($token)
     ->setBody($message)
     ->setData($data)
-	->setPriority('medium');
+    ->setPriority('medium');
 
 // Send the notification.
 $httpResponse = $notificationManager->sendNotificationHttp($notificationContentModel);
@@ -226,7 +226,7 @@ $notificationContentModel
     ->setTo('H-Dsb2ATt2FHoD_5rVG5rh')
     ->setBody('test message')
     ->setData($data)
-	->setPriority('low');
+    ->setPriority('low');
 
 // Create a second NotificationContentModel
 $anotherNotificationContentModel = new NotificationContentModel();
@@ -234,7 +234,7 @@ $anotherNotificationContentModel
     ->setTo('Z-5sb2AFt2FHoD_5rVG5rh')
     ->setBody('Your message here')
     ->setData($data)
-	->setPriority('medium');
+    ->setPriority('medium');
 
 $notificationContentModels = [
     $notificationContentModel,
