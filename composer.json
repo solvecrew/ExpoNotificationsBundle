@@ -1,5 +1,5 @@
 {
-	"name": "solvecrew/ExpoNotificationsBundle",
+	"name": "solvecrew/expo-notifications-bundle",
 	"type": "symfony-bundle",
 	"description": "Bundle to handle the BE tasks of the push notifications service for the expo react-native Framework.",
 	"keywords": ["Expo", "Push Notifications"],
