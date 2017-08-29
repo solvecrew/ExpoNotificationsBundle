@@ -13,8 +13,10 @@ class NotificationManager
     const INVALID_EXPO_ENDPOINT_MESSAGE = 'Invalid Expo API endpoint configured.';
     // The info to hint a connection exception.
     const CONNECT_EXCEPTION_MESSAGE = 'Connection could not be established.';
-    // The infor that indicates that an unknown exception was thrown.
+    // The info that indicates that an unknown exception was thrown.
     const UNKNOWN_EXCEPTION_MESSAGE = 'A Exception was thrown. Neither a ConnectionException nor a ClientException.';
+    // The info that the response was not given, but no exception was catched still.
+    const HTTP_UNHANDLED_ERROR = 'The http response was not recieved. No Exception occured.';
 
     /**
      * @var EntityManager
@@ -46,6 +48,8 @@ class NotificationManager
      *
      * @param string $message
      * @param string $token
+     * @param string $title
+     * @param array $data
      *
      * @return array
      */
@@ -53,7 +57,7 @@ class NotificationManager
         string $message,
         string $token,
         string $title = '',
-        string $data = null
+        array $data = null
     ): NotificationContentModel
     {
         $notificationContentModel = new NotificationContentModel();
@@ -82,9 +86,9 @@ class NotificationManager
 
         $httpResponse = $this->sendNotificationHttp($notificationContentModel);
 
-        $notificationContentModel = handleHttpResponse($httpResponse, [$notificationContentModel]);
+        $notificationContentModel = $this->handleHttpResponse([$httpResponse], [$notificationContentModel]);
 
-        return $notificationContentModel;
+        return $notificationContentModel[0];
     }
 
     /**
@@ -124,7 +128,7 @@ class NotificationManager
      *
      * @return bool
      */
-    private function validateMessage(string $message)
+    private function validateMessage(string $message): bool
     {
         if (strlen($message) === 0) {
             return false;
@@ -153,13 +157,53 @@ class NotificationManager
             'body' => json_encode([$notificationContentModel->getRequestData()]),
         ];
 
-        $response = $this->httpClient->request(
-            'POST',
-            $this->expoApiUrl,
-            $requestData
-        );
+        $exceptionResponse = [
+            'status' => 'error',
+            'message' => '',
+            'details' => [self::HTTP_UNHANDLED_ERROR],
+        ];
 
-        // TODO Handle Response here.
+        try {
+            $response = $this->httpClient->request(
+                'POST',
+                $this->expoApiUrl,
+                $requestData
+            );
+        } catch (ClientException $e) {
+            // Creating a Message from the status code and the reasonPhrase. E.g. '404: Not Found'.
+            $exceptionMessage = $e->getResponse()->getStatusCode() . ': ' . $e->getResponse()->getReasonPhrase();
+
+            // Returning an array in the style of the guzzle reponse, so it can be handled by the standard function.
+            $exceptionResponse = [
+                'status' => 'error',
+                'message' => $exceptionMessage,
+                'details' => [self::INVALID_EXPO_ENDPOINT_MESSAGE],
+            ];
+        } catch (ConnectException $e) {
+            // Creating a Message from the status code and the reasonPhrase. E.g. '404: Not Found'.
+            $exceptionMessage = 'No Response.';
+
+            // Returning an array in the style of the guzzle reponse, so it can be handled by the standard function.
+            $exceptionResponse = [
+                'status' => 'error',
+                'message' => $exceptionMessage,
+                'details' => [self::CONNECT_EXCEPTION_MESSAGE],
+            ];
+        } catch (Exception $e) {
+            // Creating a Message from the status code and the reasonPhrase. E.g. '404: Not Found'.
+            $exceptionMessage = 'An unknown Exception occured.';
+
+            // Returning an array in the style of the guzzle reponse, so it can be handled by the standard function.
+            $exceptionResponse = [
+                'status' => 'error',
+                'message' => $exceptionMessage,
+                'details' => [self::UNKNOWN_EXCEPTION_MESSAGE],
+            ];
+        }
+
+        if(!$response) {
+            return $exceptionResponse;
+        }
 
         $responseData = json_decode($response->getBody()->read(1024), true);
 
