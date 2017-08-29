@@ -20,9 +20,9 @@ $bundles = [
 ```
 # Configuration
 
-At the moment, this bundle only has a single opional configuration parameter.
+At the moment, this bundle only has a single optional configuration parameter.
 
-If you want (opional), add this to your `app/config/config.yml` file:
+If you want (optional), add this to your `app/config/config.yml` file:
 ```
 sc_expo_notifications:
     expo_api_endpoint: '%expo_api_endpoint%'
@@ -197,7 +197,8 @@ $notificationContentModel = new NotificationContentModel();
 $notificationContentModel
     ->setTo($token)
     ->setBody($message)
-    ->setData($data);
+    ->setData($data)
+    ->setPriority('medium');
 
 // Send the notification.
 $httpResponse = $notificationManager->sendNotificationHttp($notificationContentModel);
@@ -224,14 +225,16 @@ $notificationContentModel = new NotificationContentModel();
 $notificationContentModel
     ->setTo('H-Dsb2ATt2FHoD_5rVG5rh')
     ->setBody('test message')
-    ->setData($data);
+    ->setData($data)
+    ->setPriority('low');
 
 // Create a second NotificationContentModel
 $anotherNotificationContentModel = new NotificationContentModel();
 $anotherNotificationContentModel
     ->setTo('Z-5sb2AFt2FHoD_5rVG5rh')
     ->setBody('Your message here')
-    ->setData($data);
+    ->setData($data)
+    ->setPriority('medium');
 
 $notificationContentModels = [
     $notificationContentModel,
