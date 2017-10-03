@@ -269,4 +269,5 @@ To see the process and the API documentation for the Expo push notifications ser
 https://docs.expo.io/versions/v14.0.0/guides/push-notifications.html
 
 # LICENSE
+Created by SolveCrew 2017. Contact us if you like: info@solvecrew.com or visit our website: www.solvecrew.com
 MIT
