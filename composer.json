@@ -17,7 +17,7 @@
 	],
 	"require": {
 		"php":                                ">=5.6",
-		"eightpoints/guzzle-bundle":		  "^5.3",
+		"eightpoints/guzzle-bundle":		  "^6.0",
 		"guzzlehttp/guzzle":                  "~6.0",
 		"eightpoints/guzzle-wsse-middleware": "~4.0",
 		"symfony/dependency-injection":       "~2.3|~3.0",
@@ -28,7 +28,7 @@
 	},
 	"require-dev": {
 		"php": ">=5.3",
-		"eightpoints/guzzle-bundle": "^5.3",
+		"eightpoints/guzzle-bundle": "^6.0",
 		"phpunit/phpunit": "~5.4",
 		"symfony/config":  "2.3|~3.0"
 	},
