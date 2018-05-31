@@ -217,7 +217,7 @@ class NotificationManager
      *
      * @return array
      */
-    private function sendNotificationsHttp(array $notificationContentModels): array
+    private function sendNotificationsHttp($notificationContentModels)
     {
         $headers = [
             'accept' => 'application/json',
@@ -297,11 +297,11 @@ class NotificationManager
      * @return array
      */
     private function createNotificationContentModels(
-        array $tokens,
-        array $messages,
-        array $titles = [],
-        array $data = []
-    ): array
+        $tokens,
+        $messages,
+        $titles = [],
+        $data = []
+    )
     {
         $notificationContentModels = [];
 
@@ -344,9 +344,9 @@ class NotificationManager
      * @return array
      */
     private function handleHttpResponse(
-        array $httpResponse,
-        array $notificationContentModels
-    ): array
+        $httpResponse,
+        $notificationContentModels
+    )
     {
         foreach ($httpResponse as $key => $httpResponseDetails) {
             // Being pessimistic here.
@@ -384,7 +384,7 @@ class NotificationManager
      *
      * @return array
      */
-    private function createRequestBody(array $notificationContentModels): array
+    private function createRequestBody($notificationContentModels)
     {
         $requestData = [];
 
