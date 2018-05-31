@@ -54,11 +54,11 @@ class NotificationManager
      * @return array
      */
     public function sendNotification(
-        string $message,
-        string $token,
-        string $title = '',
-        array $data = null
-    ): NotificationContentModel
+        $message,
+        $token,
+        $title = '',
+        $data = null
+    )
     {
         $notificationContentModel = new NotificationContentModel();
         $notificationContentModel
@@ -102,11 +102,11 @@ class NotificationManager
      * @return array
      */
     public function sendNotifications(
-        array $messages,
-        array $tokens,
-        array $titles = [],
-        array $data = []
-    ): array
+        $messages,
+        $tokens,
+        $titles = [],
+        $data = []
+    )
     {
         if (count($messages) !== count($tokens)) {
             return [];
@@ -128,7 +128,7 @@ class NotificationManager
      *
      * @return bool
      */
-    private function validateMessage(string $message): bool
+    private function validateMessage($message)
     {
         if (strlen($message) === 0) {
             return false;
@@ -144,7 +144,7 @@ class NotificationManager
      *
      * @return array
      */
-    private function sendNotificationHttp(NotificationContentModel $notificationContentModel): array
+    private function sendNotificationHttp(NotificationContentModel $notificationContentModel)
     {
         $headers = [
             'accept' => 'application/json',
