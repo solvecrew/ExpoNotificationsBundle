@@ -54,11 +54,11 @@ class NotificationManager
      * @return array
      */
     public function sendNotification(
-        string $message,
-        string $token,
-        string $title = '',
-        array $data = null
-    ): NotificationContentModel
+        $message,
+        $token,
+        $title = '',
+        $data = null
+    )
     {
         $notificationContentModel = new NotificationContentModel();
         $notificationContentModel
@@ -102,11 +102,11 @@ class NotificationManager
      * @return array
      */
     public function sendNotifications(
-        array $messages,
-        array $tokens,
-        array $titles = [],
-        array $data = []
-    ): array
+        $messages,
+        $tokens,
+        $titles = [],
+        $data = []
+    )
     {
         if (count($messages) !== count($tokens)) {
             return [];
@@ -128,7 +128,7 @@ class NotificationManager
      *
      * @return bool
      */
-    private function validateMessage(string $message): bool
+    private function validateMessage($message)
     {
         if (strlen($message) === 0) {
             return false;
@@ -144,7 +144,7 @@ class NotificationManager
      *
      * @return array
      */
-    private function sendNotificationHttp(NotificationContentModel $notificationContentModel): array
+    private function sendNotificationHttp(NotificationContentModel $notificationContentModel)
     {
         $headers = [
             'accept' => 'application/json',
@@ -217,7 +217,7 @@ class NotificationManager
      *
      * @return array
      */
-    private function sendNotificationsHttp(array $notificationContentModels): array
+    public function sendNotificationsHttp($notificationContentModels)
     {
         $headers = [
             'accept' => 'application/json',
@@ -297,11 +297,11 @@ class NotificationManager
      * @return array
      */
     private function createNotificationContentModels(
-        array $tokens,
-        array $messages,
-        array $titles = [],
-        array $data = []
-    ): array
+        $tokens,
+        $messages,
+        $titles = [],
+        $data = []
+    )
     {
         $notificationContentModels = [];
 
@@ -343,10 +343,10 @@ class NotificationManager
      *
      * @return array
      */
-    private function handleHttpResponse(
-        array $httpResponse,
-        array $notificationContentModels
-    ): array
+    public function handleHttpResponse(
+        $httpResponse,
+        $notificationContentModels
+    )
     {
         foreach ($httpResponse as $key => $httpResponseDetails) {
             // Being pessimistic here.
@@ -356,14 +356,14 @@ class NotificationManager
                 $wasSuccessful = true;
             } else {
                 // Set the response message if there is one.
-                if ($httpResponseDetails['message']
+                if (isset($httpResponseDetails['message'])
                     && strlen($httpResponseDetails['message']) > 0
                 ) {
                     $notificationContentModels[$key]->setResponseMessage($httpResponseDetails['message']);
                 }
 
                 // Set the response detail if there is one.
-                if ($httpResponseDetails['details']
+                if (isset($httpResponseDetails['details'])
                     && count($httpResponseDetails['details']) > 0
                 ) {
                     $notificationContentModels[$key]->setResponseDetails($httpResponseDetails['details']);
@@ -384,7 +384,7 @@ class NotificationManager
      *
      * @return array
      */
-    private function createRequestBody(array $notificationContentModels): array
+    private function createRequestBody($notificationContentModels)
     {
         $requestData = [];
 
