@@ -356,14 +356,14 @@ class NotificationManager
                 $wasSuccessful = true;
             } else {
                 // Set the response message if there is one.
-                if ($httpResponseDetails['message']
+                if (isset($httpResponseDetails['message'])
                     && strlen($httpResponseDetails['message']) > 0
                 ) {
                     $notificationContentModels[$key]->setResponseMessage($httpResponseDetails['message']);
                 }
 
                 // Set the response detail if there is one.
-                if ($httpResponseDetails['details']
+                if (isset($httpResponseDetails['details'])
                     && count($httpResponseDetails['details']) > 0
                 ) {
                     $notificationContentModels[$key]->setResponseDetails($httpResponseDetails['details']);
