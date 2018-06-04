@@ -75,7 +75,7 @@ class NotificationContentModel
      *
      * @return NotificationContentModel
      */
-    public function setTo(string $token)
+    public function setTo($token)
     {
         $this->to = $token;
         if (!preg_match('/^'.preg_quote(self::EXPO_TOKEN_PREFIX, '/').'.*'.preg_quote(self::EXPO_TOKEN_SUFFIX, '/').'$/', $token)) {
@@ -126,7 +126,7 @@ class NotificationContentModel
      *
      * @return NotificationContentModel
      */
-    public function setTitle(string $title)
+    public function setTitle($title)
     {
         $this->title = $title;
 
@@ -150,7 +150,7 @@ class NotificationContentModel
      *
      * @return NotificationContentModel
      */
-    public function setBody(string $body)
+    public function setBody($body)
     {
         $this->body = $body;
 
@@ -174,7 +174,7 @@ class NotificationContentModel
      *
      * @return NotificationContentModel
      */
-    public function setSound(string $sound)
+    public function setSound($sound)
     {
         $this->sound = $sound;
 
@@ -198,7 +198,7 @@ class NotificationContentModel
      *
      * @return NotificationContentModel
      */
-    public function setTtl(int $ttl)
+    public function setTtl($ttl)
     {
         $this->ttl = $ttl;
 
@@ -222,7 +222,7 @@ class NotificationContentModel
      *
      * @return NotificationContentModel
      */
-    public function setExpiration(int $expiration)
+    public function setExpiration($expiration)
     {
         $this->expiration = $expiration;
 
@@ -246,7 +246,7 @@ class NotificationContentModel
      *
      * @return NotificationContentModel
      */
-    public function setPriority(string $priority)
+    public function setPriority($priority)
     {
         $this->priority = $priority;
 
@@ -270,7 +270,7 @@ class NotificationContentModel
      *
      * @return NotificationContentModel
      */
-    public function setBadge(int $badge)
+    public function setBadge($badge)
     {
         $this->badge = $badge;
 
@@ -294,7 +294,7 @@ class NotificationContentModel
      *
      * @return NotificationContentModel
      */
-    public function setWasSuccessful(bool $wasSuccessful)
+    public function setWasSuccessful($wasSuccessful)
     {
         $this->wasSuccessful = $wasSuccessful;
 
@@ -318,7 +318,7 @@ class NotificationContentModel
      *
      * @return NotificationContentModel
      */
-    public function setResponseMessage(string $responseMessage)
+    public function setResponseMessage($responseMessage)
     {
         $this->responseMessage = $responseMessage;
 
@@ -342,7 +342,7 @@ class NotificationContentModel
      *
      * @return NotificationContentModel
      */
-    public function setResponseDetails(array $responseDetails)
+    public function setResponseDetails($responseDetails)
     {
         $this->responseDetails = $responseDetails;
 
