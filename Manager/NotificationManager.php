@@ -217,7 +217,7 @@ class NotificationManager
      *
      * @return array
      */
-    private function sendNotificationsHttp($notificationContentModels)
+    public function sendNotificationsHttp($notificationContentModels)
     {
         $headers = [
             'accept' => 'application/json',
@@ -343,7 +343,7 @@ class NotificationManager
      *
      * @return array
      */
-    private function handleHttpResponse(
+    public function handleHttpResponse(
         $httpResponse,
         $notificationContentModels
     )
