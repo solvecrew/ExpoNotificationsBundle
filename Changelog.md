@@ -1,9 +1,13 @@
 Changelog
 =========
 
+### php56
+
+* Created a `php56` branch of the bundle. Contributed by Lauzel.
+
 ### 1.1.0
 
-* eightpoints/guzzle-bundle dependency updated to "^6.0". Thanks to stingus! 
+* eightpoints/guzzle-bundle dependency updated to "^6.0". Thanks to stingus!
 
 ### 1.0.1
 
