@@ -17,18 +17,18 @@
 	],
 	"require": {
 		"php":                                ">=7.0",
-		"eightpoints/guzzle-bundle":		  "^6.0",
+		"eightpoints/guzzle-bundle":		  "^6.0|~7.0",
 		"guzzlehttp/guzzle":                  "~6.0",
 		"eightpoints/guzzle-wsse-middleware": "~4.0",
-		"symfony/dependency-injection":       "~2.3|~3.0",
-		"symfony/expression-language":        "~2.3|~3.0",
-		"symfony/event-dispatcher":           "~2.3|~3.0",
-		"symfony/http-kernel":                "~2.3|~3.0",
+		"symfony/dependency-injection":       "~2.3|~3.0|~4.0",
+		"symfony/expression-language":        "~2.3|~3.0|~4.0",
+		"symfony/event-dispatcher":           "~2.3|~3.0|~4.0",
+		"symfony/http-kernel":                "~2.3|~3.0|~4.0",
 		"psr/log":                            "~1.0"
 	},
 	"require-dev": {
 		"php": ">=5.3",
-		"eightpoints/guzzle-bundle": "^6.0",
+		"eightpoints/guzzle-bundle": "^6.0|~7.0",
 		"phpunit/phpunit": "~5.4",
 		"symfony/config":  "2.3|~3.0"
 	},
