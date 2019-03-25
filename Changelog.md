@@ -1,6 +1,10 @@
 Changelog
 =========
 
+### 1.2.1
+
+* Changed `sendNotificationHttp` and `sendNotificationsHttp` function of `Manager/NotificationManager.php` to be public accessible. Thanks to chriskaya!
+
 ### 1.2.0
 
 * Updated dependencies for Symfony 4. Thanks to chriskaya!
