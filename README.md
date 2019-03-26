@@ -198,7 +198,7 @@ $notificationContentModel
     ->setTo($token)
     ->setBody($message)
     ->setData($data)
-    ->setPriority('medium');
+    ->setPriority('normal'); // Priority can be 'high' (default), 'normal', 'default'
 
 // Send the notification.
 $httpResponse = $notificationManager->sendNotificationHttp($notificationContentModel);
@@ -226,7 +226,7 @@ $notificationContentModel
     ->setTo('H-Dsb2ATt2FHoD_5rVG5rh')
     ->setBody('test message')
     ->setData($data)
-    ->setPriority('low');
+    ->setPriority('default'); // Priority can be 'high' (default), 'normal', 'default'
 
 // Create a second NotificationContentModel
 $anotherNotificationContentModel = new NotificationContentModel();
