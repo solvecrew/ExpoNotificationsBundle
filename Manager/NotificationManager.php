@@ -162,6 +162,8 @@ class NotificationManager
             'message' => '',
             'details' => [self::HTTP_UNHANDLED_ERROR],
         ];
+        
+        $response = false;
 
         try {
             $response = $this->httpClient->request(
@@ -231,6 +233,8 @@ class NotificationManager
                 $this->createRequestBody($notificationContentModels)
             ),
         ];
+        
+        $response = false;
 
         try {
             $response = $this->httpClient->request(
