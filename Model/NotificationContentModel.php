@@ -54,6 +54,11 @@ class NotificationContentModel
     private $badge;
 
     /**
+     * @var string
+     */
+    private $channelId;
+
+    /**
      * @var bool
      */
     private $wasSuccessful;
@@ -288,6 +293,30 @@ class NotificationContentModel
     }
 
     /**
+     * Set channelId
+     *
+     * @param string $channelId
+     *
+     * @return NotificationContentModel
+     */
+    public function setChannelId(string $channelId)
+    {
+        $this->channelId = $channelId;
+
+        return $this;
+    }
+
+    /**
+     * Get channelId
+     *
+     * @return string
+     */
+    public function getChannelId()
+    {
+        return $this->channelId;
+    }
+
+    /**
      * Set wasSuccessful
      *
      * @param bool $wasSuccessful
@@ -402,6 +431,10 @@ class NotificationContentModel
 
         if ($this->badge) {
             $result['badge'] = $this->badge;
+        }
+
+        if ($this->channelId) {
+            $result['channelId'] = $this->channelId;
         }
 
         return $result;
