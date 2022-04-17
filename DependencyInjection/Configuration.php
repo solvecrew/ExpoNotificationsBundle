@@ -20,9 +20,9 @@ class Configuration implements ConfigurationInterface
      */
     public function getConfigTreeBuilder()
     {
-        $treeBuilder = new TreeBuilder();
-        $rootNode = $treeBuilder->root('sc_expo_notifications');
-
+        $treeBuilder = new TreeBuilder('sc_expo_notifications');
+        $rootNode = $treeBuilder->getRootNode();
+        
         $rootNode
             ->children()
                 ->scalarNode('expo_api_endpoint')->defaultValue(self::EXPO_API_ENDPOINT)->end()
