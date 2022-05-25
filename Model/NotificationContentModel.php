@@ -12,6 +12,12 @@ class NotificationContentModel
      * @var string
      */
     private $to;
+    
+    /**
+     * @var string
+     */
+    private $id;
+
 
     /**
      * @var array
@@ -94,6 +100,27 @@ class NotificationContentModel
     {
         return $this->to;
     }
+    
+    public function getId() 
+    {
+        return $this->id;
+    }
+    
+    /**
+     * Set data
+     *
+     * @param array $data
+     *
+     * @return NotificationContentModel
+     */
+    public function setId(?string $id)
+    {
+        $this->id = $id;
+
+        return $this;
+    }
+
+    
 
     /**
      * Set data
