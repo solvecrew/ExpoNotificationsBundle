@@ -101,6 +101,11 @@ class NotificationContentModel
         return $this->to;
     }
     
+    **
+     * Get id
+     *
+     * @return string
+     */
     public function getId() 
     {
         return $this->id;
