@@ -371,7 +371,7 @@ class NotificationManager
             }
 
             $notificationContentModels[$key]->setWasSuccessful($wasSuccessful);
-            $notificationContentModels[$key]->setId($key);
+            $notificationContentModels[$key]->setId($httpResponseDetails['id']);
         }
 
         return $notificationContentModels;
