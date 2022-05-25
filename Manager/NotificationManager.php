@@ -371,6 +371,7 @@ class NotificationManager
             }
 
             $notificationContentModels[$key]->setWasSuccessful($wasSuccessful);
+            $notificationContentModels[$key]->setId($key);
         }
 
         return $notificationContentModels;
