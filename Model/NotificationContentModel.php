@@ -16,7 +16,7 @@ class NotificationContentModel
     /**
      * @var string
      */
-    private $id;
+    private $id = '';
 
 
     /**
@@ -109,11 +109,11 @@ class NotificationContentModel
     /**
      * Set data
      *
-     * @param array $data
+     * @param string $id
      *
      * @return NotificationContentModel
      */
-    public function setId(?string $id)
+    public function setId( string $id)
     {
         $this->id = $id;
 
