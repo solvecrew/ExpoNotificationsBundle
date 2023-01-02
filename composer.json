@@ -27,7 +27,7 @@
 		"psr/log":                            "~1.0"
 	},
 	"require-dev": {
-		"php": ">=5.3",
+		"php": ">=7.3",
 		"phpunit/phpunit": "~5.4",
 		"symfony/config":  "2.3|~3.0"
 	},
